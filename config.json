@@ -12,8 +12,8 @@
   "antiInbox": false,
   "language": "en",
   "notesLanguage": "change to your language with ISO 639-1 code, available languages: vi (Vietnamese), en (English)",
-  "nickNameBot": "[ ^ ]—͞💜 Rasel 𝐁𝐀𝐁𝐘 𝐁𝐎𝐓",
-  "prefix": "^",
+  "nickNameBot": "[ ^ ]—͞💜 𝐑𝐀𝐒𝐄𝐋 𝐁𝐀𝐁𝐘 𝐁𝐎𝐓",
+  "prefix": ".",
   "api": "https://api.noobs-api.rf.gd/dipto",
   "approval": false,
   "reactBy": {

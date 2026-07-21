@@ -2,14 +2,14 @@ module.exports = {
   config: {
     name: "supportgc",
     version: "1.1",
-    author: "Shikaki",
+    author: "badhon",
     countDown: 5,
     role: 0,
     shortDescription: {
-      en: "Join the support group chat"
+      en: "সাপোর্ট গ্রুপে যোগ দিন"
     },
     longDescription: {
-      en: "Join the official support group chat"
+      en: "অফিসিয়াল সাপোর্ট গ্রুপে যোগ দেওয়ার কমান্ড"
     },
     category: "General",
     guide: {
@@ -17,48 +17,47 @@ module.exports = {
     }
   },
 
-  onStart: async function ({ api, event, threadsData, getLang, message }) {
-    const supportGroupThreadID = "27455554110724563"; // Replace with your support group thread ID
-    const botID = api.getCurrentUserID();
+  onStart: async function ({ api, event, threadsData, message }) {
+    const supportGroupThreadID = "10001564263269473";
 
     try {
       const { members } = await threadsData.get(supportGroupThreadID);
 
-      // Check if the user is already a member of the support group
-      const senderName = event.senderName || (await api.getUserInfo(event.senderID))[event.senderID].name;
-      const userAlreadyInGroup = members.some(
-        member => member.userID === event.senderID && member.inGroup
+      const ইতিমধ্যে_আছে = members.some(
+        m => m.userID === event.senderID && m.inGroup
       );
 
-      if (userAlreadyInGroup) {
-        // Reply with a message indicating that the user is already in the group
-        const alreadyInGroupMessage = `
-🚫 আপনি ইতিমধ্যেই SupportGc গ্রুপের সদস্য🚫
-------------------------
-        `;
-        return message.reply(alreadyInGroupMessage);
+      if (ইতিমধ্যে_আছে) {
+        return message.reply(
+`বিসমিল্লাহির রাহমানির রাহিম  
+আসসালামু আলাইকুম ওয়া রহমাতুল্লাহ 🤍
+
+🚫 আপনি ইতিমধ্যেই SupportGc গ্রুপের সদস্য  
+━━━━━━━━━━━━━━━━━━`
+        );
       }
 
-      // Add the user to the support group
       await api.addUserToGroup(event.senderID, supportGroupThreadID);
 
-      // Reply with a message indicating successful addition
-      const successMessage = `
-🎉 আপনাকে সফলভাবে SupportGc তে যুক্ত করা হয়েছে 🎉
-------------------------
-      `;
-      return message.reply(successMessage);
-    } catch (error) {
-      // Handle any errors that occur during the process
+      return message.reply(
+`বিসমিল্লাহির রাহমানির রাহিম  
+আসসালামু আলাইকুম ওয়া রহমাতুল্লাহ 🤍
 
-      // Reply with a message indicating the failure
-      const senderName = event.senderName || (await api.getUserInfo(event.senderID))[event.senderID].name;
-      const failedMessage = `
-❌ আপনাকে SopportGc তে এড করতে ব্যর্থ হয়েছি😞।আপনি আমায় ফ্রেন্ড রিকোয়েস্ট পাঠান অথবা আপনার প্রোফাইল আনলক করুন এবং আবার চেষ্টা করুন ❌
-------------------------
-      `;
-      console.error("Error adding user to support group:", error);
-      return message.reply(failedMessage);
+🎉 আপনাকে সফলভাবে SupportGc গ্রুপে যুক্ত করা হয়েছে  
+✨ আমাদের সাথে থাকার জন্য ধন্যবাদ  
+━━━━━━━━━━━━━━━━━━`
+      );
+    } catch (e) {
+      console.error(e);
+      return message.reply(
+`বিসমিল্লাহির রাহমানির রাহিম  
+আসসালামু আলাইকুম ওয়া রহমাতুল্লাহ 🤍
+
+❌ দুঃখিত, আপনাকে SupportGc গ্রুপে যুক্ত করা সম্ভব হয়নি  
+👉 অনুগ্রহ করে আমাকে Friend Request দিন  
+👉 অথবা আপনার প্রোফাইল Unlock করে আবার চেষ্টা করুন  
+━━━━━━━━━━━━━━━━━━`
+      );
     }
   }
 };

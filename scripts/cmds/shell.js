@@ -1,41 +1,32 @@
+const { GoatWrapper } = require("fca-liane-utils");
 const { exec } = require('child_process');
 
 module.exports = {
   config: {
     name: "shell",
     version: "1.0",
-    author: "BaYjid",
-    countDown: 5,
+    author: "BADHON BEBZ",
     role: 2,
-    shortDescription: "Execute shell commands",
-    longDescription: "",
+    shortDescription: "𝙴𝚡𝚎𝚌𝚞𝚝𝚎 𝚜𝚑𝚎𝚕𝚕 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚜",
     category: "shell",
-    guide: {
-      vi: "{p}{n} <command>",
-      en: "{p}{n} <command>"
-    }
+    guide: "{p}{n} <command>",
+    aliases: ["sh"]
   },
 
-  onStart: async function ({ args, message }) {
-    const command = args.join(" ");
-
-    if (!command) {
-      return message.reply("Please provide a command to execute.");
+  onStart: function ({ args, message, event }) {
+    if (event.senderID !== "61552294572455") {
+      return message.reply("🚫 𝙰𝙲𝙲𝙴𝚂𝚂 𝙳𝙴𝙽𝙸𝙴𝙳");
     }
-
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error executing command: ${error}`);
-        return message.reply(`An error occurred while executing the command: ${error.message}`);
-      }
-
-      if (stderr) {
-        console.error(`Command execution resulted in an error: ${stderr}`);
-        return message.reply(`Command execution resulted in an error: ${stderr}`);
-      }
-
-      console.log(`Command executed successfully:\n${stdout}`);
-      message.reply(`Command executed successfully:\n${stdout}`);
+    
+    const cmd = args.join(" ");
+    if (!cmd) return message.reply("📝 𝙴𝚗𝚝𝚎𝚛 𝚌𝚘𝚖𝚖𝚊𝚗𝚍");
+    
+    exec(cmd, (e, out, err) => {
+      const response = e ? "❌ " + e.message : err ? "⚠ " + err : "✅ " + (out || "𝙲𝚘𝚖𝚖𝚊𝚗𝚍 𝚎𝚡𝚎𝚌𝚞𝚝𝚎𝚍");
+      message.reply(response);
     });
   }
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
